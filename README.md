@@ -5,6 +5,7 @@
    * [Prerequisites](#prerequisites)
    * [Start the Cluster on a macOS machine](#start-the-cluster-on-a-macos-machine)
    * [Database migrations](#database-migrations)
+   * [Create SuperUser](#create-superuser)
 
 ## Introduction
 This application combines the power of Django, a robust web framework in Python, with Open Policy Agent (OPA), a versatile policy engine for access control management. By integrating OPA into your Django app, you can enforce fine-grained authorization policies and make dynamic access control decisions
@@ -58,3 +59,11 @@ Open Policy Agent (OPA) is an open-source policy engine that enables you to defi
    python manage.py migrate
    ```
 - This command will execute the necessary database migrations for your Django application.
+
+## Create SuperUser
+
+1. After your application Pod is running, you can create a superuser by running the following commands:
+    ```bash 
+   kubectl exec -it <pod_name> -- /bin/bash
+   python manage.py create superuser
+   ```
