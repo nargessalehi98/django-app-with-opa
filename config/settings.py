@@ -39,6 +39,9 @@ LOGS_DIR = BASE_DIR / 'logs'
 if not os.path.exists(LOGS_DIR):
     os.makedirs(LOGS_DIR)
 
+DB_DIR = BASE_DIR / 'db'
+if not os.path.exists(DB_DIR):
+    os.makedirs(DB_DIR)
 
 # Application definition
 
@@ -94,7 +97,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DB_DIR / 'db.sqlite3',
     }
 }
 
