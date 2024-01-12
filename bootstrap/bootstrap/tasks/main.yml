@@ -1,0 +1,27 @@
+---
+- name: "Checking requirements"
+  include_tasks: tasks/requirements.yaml
+
+#- name: "Create Colima cluster"
+#  include_tasks: tasks/colima.yaml
+#  vars:
+#    colima_profile: "{{colima_cluster_profile}}"
+#    colima_cpu: "{{colima_cluster_cpu}}"
+#    colima_memory: "{{colima_cluster_memory}}"
+#    colima_flags: "{{colima_cluster_flags}}"
+
+- name: "Create app instance"
+  include_tasks: tasks/helm.yaml
+  vars:
+    release_namespace: "{{app_namespace}}"
+    chart_path: "{{app_chart_path}}" 
+    release_name: app
+    chart_version: "{{app_chart_version}}"
+
+- name: "Create opa instance"
+  include_tasks: tasks/helm.yaml
+  vars:
+    release_namespace: "{{opa_namespace}}"
+    chart_path: "{{opa_chart_path}}" 
+    release_name: opa
+    chart_version: "{opa_chart_version}}"

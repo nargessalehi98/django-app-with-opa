@@ -1,0 +1,15 @@
+---
+- name: "Reset colima"
+  command: colima delete {{ colima_profile }} -f
+
+- name: "Start colima"
+  block:
+    - name: "Colima config"
+      debug:
+        msg: "profile: {{ colima_profile }}, cpu: {{ colima_cpu }} cores, memory {{ colima_memory }} GB, flags: {{ colima_flags }}"
+
+    - name: "Start colima"
+      command: colima start {{ colima_profile }} --cpu {{ colima_cpu }} --memory {{ colima_memory }} {{ colima_flags }} 
+
+- name: "Tune vm.max_map_count setting"
+  command: "colima ssh -p {{ colima_profile }} \"sudo sysctl -w vm.max_map_count=262144\""

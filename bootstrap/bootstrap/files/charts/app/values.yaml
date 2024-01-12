@@ -1,0 +1,112 @@
+replicaCount: 1
+
+progressDeadlineSeconds: 300
+
+image:
+  repository: nargessalehi98/django-app-with-opa
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.0.11"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "my-cool-service"
+
+env:          
+  - name: "DEBUG"
+    value: "False"
+  - name: "ALLOWED_HOSTS"
+    value: "*"
+  - name: "OPA_HOST"
+    value: "opa"
+  - name: "OPA_PORT"
+    value: "8181"
+  - name: "OPA_POLICY_NAME"
+    value: "/opa-policies/policy.rego"
+  - name: "OPA_RULE_NAME"
+    value: "allow"
+  - name: "PORT"
+    value: "8000"
+
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: LoadBalancer
+  port: 8000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+#volumes:
+#  - name: sqlite-storage
+#    persistentVolumeClaim:
+#      claimName: sqlite-pvc
+#
+## Additional volumeMounts on the output Deployment definition.
+#
+#volumeMounts:
+#  - name: sqlite-storage
+#    mountPath: /django-app-with-opa/
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

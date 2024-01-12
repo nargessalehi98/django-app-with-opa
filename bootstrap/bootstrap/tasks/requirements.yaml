@@ -1,0 +1,11 @@
+---
+- name: "Checking homebrew packages"
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - colima
+    - kubectl
+    - helm
+    - derailed/k9s/k9s
+  

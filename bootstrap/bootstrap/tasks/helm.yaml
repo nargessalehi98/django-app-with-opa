@@ -1,0 +1,13 @@
+---
+- name: "Install {{ release_name }} using Helm chart"
+  kubernetes.core.helm:
+    release_namespace: "{{ release_namespace }}"
+    purge: false              # remove the release from the store and make its name free for later use.
+    wait: false                # wait until all Pods, PVCs, Services, and minimum number of Pods of a Deployment are in a ready state before marking the release as successful
+    update_repo_cache: false   # run helm repo update before the operation
+    create_namespace: true
+    chart_ref: "{{ chart_path }}" 
+    release_name: "{{ release_name }}"
+    chart_version: "{{ chart_version }}"
+    values_files:
+      - "{{ chart_path }}/values.yaml"

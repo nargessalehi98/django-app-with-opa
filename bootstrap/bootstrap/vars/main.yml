@@ -1,0 +1,13 @@
+---
+colima_cluster_profile: app-cluster
+colima_cluster_cpu: 2
+colima_cluster_memory: 2
+colima_cluster_flags: "--kubernetes  --arch x86_64  --network-address --dns=8.8.8.8"
+
+app_namespace: default
+app_chart_path: bootstrap/files/charts/app
+app_chart_version: 0.1.0
+
+opa_namespace: default
+opa_chart_path: bootstrap/files/charts/opa
+opa_chart_version: 0.1.0
