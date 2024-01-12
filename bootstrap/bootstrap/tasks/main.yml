@@ -2,13 +2,13 @@
 - name: "Checking requirements"
   include_tasks: tasks/requirements.yaml
 
-#- name: "Create Colima cluster"
-#  include_tasks: tasks/colima.yaml
-#  vars:
-#    colima_profile: "{{colima_cluster_profile}}"
-#    colima_cpu: "{{colima_cluster_cpu}}"
-#    colima_memory: "{{colima_cluster_memory}}"
-#    colima_flags: "{{colima_cluster_flags}}"
+- name: "Create Colima cluster"
+  include_tasks: tasks/colima.yaml
+  vars:
+    colima_profile: "{{colima_cluster_profile}}"
+    colima_cpu: "{{colima_cluster_cpu}}"
+    colima_memory: "{{colima_cluster_memory}}"
+    colima_flags: "{{colima_cluster_flags}}"
 
 - name: "Create app instance"
   include_tasks: tasks/helm.yaml
